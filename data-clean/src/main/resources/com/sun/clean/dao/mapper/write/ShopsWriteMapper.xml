@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.write.ShopsWriteMapper">
+    <insert id="insertList">
+        INSERT INTO dc_meal_shops VALUES
+        <foreach collection="writeList" open="(" close=")" separator="),(" item="shops">
+            #{shops.id},#{shops.businessDistrictId},#{shops.caShopName},
+            #{shops.caShopStyles},#{shops.caShopAvgprice},
+            #{shops.caShopReviews},#{shops.caShopReviewersGroup}
+        </foreach>
+    </insert>
+</mapper>

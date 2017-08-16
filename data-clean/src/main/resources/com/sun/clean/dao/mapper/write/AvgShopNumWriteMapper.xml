@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.write.AvgShopNumWriteMapper">
+    <insert id="insertList">
+        INSERT INTO dc_meal_avg_price_greater_than_eighty_shop_num VALUES
+        <foreach collection="writeList" open="(" close=")" separator="),(" item="avgShopNumWrite">
+            #{avgShopNumWrite.id},#{avgShopNumWrite.businessDistrictId},#{avgShopNumWrite.caShopStyles},
+            #{avgShopNumWrite.commentGrowthRate},#{avgShopNumWrite.caShopReviewersGroup}
+        </foreach>
+    </insert>
+</mapper>

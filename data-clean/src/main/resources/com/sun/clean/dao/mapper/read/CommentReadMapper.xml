@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.read.CommentReadMapper">
+    <select id="getSrcId" resultType="java.lang.String">
+        SELECT src_shop_id
+        FROM dc_meal_comment
+    </select>
+    <select id="getDesId" resultType="java.lang.String">
+        SELECT des_shop_id
+        FROM dc_meal_comment
+    </select>
+</mapper>

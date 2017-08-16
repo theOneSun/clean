@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.read.ShopsReadMapper">
+
+    <resultMap id="shopsReadResultMap" type="com.sun.clean.domain.read.ShopsRead">
+        <id column="id" property="id" javaType="String" jdbcType="CLOB" />
+        <result column="business_district_id" property="businessDistrictId" jdbcType="CLOB" javaType="String" />
+        <result column="ca_shop_name" property="caShopName" jdbcType="CLOB" javaType="String" />
+        <result column="ca_shop_styles" property="caShopStyles" jdbcType="CLOB" javaType="String" />
+        <result column="ca_shop_avgprice" property="caShopAvgprice" jdbcType="CLOB" javaType="String" />
+        <result column="ca_shop_reviews" property="caShopReviews" jdbcType="CLOB" javaType="String" />
+        <result column="ca_shop_reviewers_group" property="caShopReviewersGroup" jdbcType="INTEGER" javaType="Integer" />
+    </resultMap>
+
+    <delete id="deleteRedundant">
+        DELETE FROM dc_meal_shops WHERE id IN
+        <foreach collection="deleteList" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getRedundantGroupList" resultType="com.sun.clean.domain.read.ShopsRead">
+        SELECT
+			business_district_id,
+			ca_shop_name,
+			ca_shop_styles,
+			ca_shop_reviewers_group
+		FROM
+			dc_meal_shops
+		GROUP BY
+			business_district_id,
+			ca_shop_reviewers_group,
+			ca_shop_styles,
+			ca_shop_name
+		HAVING
+			count(1) > 1
+    </select>
+    <select id="getAllDeleteList" resultType="com.sun.clean.domain.read.ShopsRead">
+    <!--<select id="getAllDeleteList" resultMap="shopsReadResultMap">-->
+        SELECT * FROM dc_meal_shops
+        WHERE (
+            business_district_id,
+            ca_shop_name,
+            ca_shop_styles,
+            ca_shop_reviewers_group
+            )
+        IN
+	    <foreach collection="shopsReadList" item="shopsRead" open="((" separator="),(" close="))">
+            #{shopsRead.businessDistrictId},#{shopsRead.caShopName},
+            #{shopsRead.caShopStyles},#{shopsRead.caShopReviewersGroup}
+        </foreach>
+    </select>
+    <select id="getAll" resultType="com.sun.clean.domain.read.ShopsRead">
+        SELECT * FROM dc_meal_shops
+    </select>
+    <select id="getAllDeleteByTemp" resultType="com.sun.clean.domain.read.ShopsRead">
+        SELECT
+            s.id,
+            s.business_district_id,
+            s.ca_shop_name,
+            s.ca_shop_styles,
+            s.ca_shop_reviewers_group
+        FROM
+            dc_meal_shops s,
+            dc_meal_shops_tmp t
+        WHERE
+            s.business_district_id = t.business_district_id
+        AND s.ca_shop_name = t.ca_shop_name
+        AND s.ca_shop_styles = t.ca_shop_styles
+        AND s.ca_shop_reviewers_group = t.ca_shop_reviewers_group;
+    </select>
+    <select id="createTempTable">
+        CREATE temporary TABLE dc_meal_shops_tmp AS (
+            SELECT
+                business_district_id,
+                ca_shop_name,
+                ca_shop_styles,
+                ca_shop_reviewers_group
+            FROM
+                dc_meal_shops
+            GROUP BY
+                business_district_id,
+                ca_shop_reviewers_group,
+                ca_shop_styles,
+                ca_shop_name
+            HAVING
+                count(1) > 1
+        );
+    </select>
+    <select id="dropTempTable">
+        DROP TEMPORARY TABLE IF EXISTS dc_meal_shops_tmp;
+    </select>
+</mapper>

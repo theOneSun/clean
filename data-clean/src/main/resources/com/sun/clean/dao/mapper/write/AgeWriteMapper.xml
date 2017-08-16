@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.write.AgeWriteMapper">
+    <insert id="insertList">
+        INSERT INTO dc_meal_age VALUES
+        <foreach collection="ageWriteList" open="(" close=")" separator="),(" item="ageWrite">
+            #{ageWrite.id},#{ageWrite.businessDistrictId},#{ageWrite.caPersonaAge_0_19},
+            #{ageWrite.caPersonaAge_20_29},#{ageWrite.caPersonaAge_30_39},#{ageWrite.caPersonaAge_40_49},
+            #{ageWrite.caPersonaAge_50_59},#{ageWrite.caPersonaAge_60_above},#{ageWrite.caPersonaGenderBatchIndex}
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.write.BcaSituationWriteMapper">
+    <insert id="insertList">
+        INSERT INTO dc_meal_bca_restaurant_format_situation VALUES
+        <foreach collection="writeList" open="(" close=")" separator="),(" item="bcaSituation">
+            #{bcaSituation.id},#{bcaSituation.businessDistrictId},#{bcaSituation.mealType},
+            #{bcaSituation.number},#{bcaSituation.group}
+        </foreach>
+    </insert>
+</mapper>

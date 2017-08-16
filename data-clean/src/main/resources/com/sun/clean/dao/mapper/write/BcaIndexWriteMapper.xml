@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.write.BcaIndexWriteMapper">
+    <insert id="insertList">
+        INSERT INTO dc_meal_bca_overview_shunt_index VALUES
+        <foreach collection="writeList" open="(" close=")" separator="),(" item="bcaIndex">
+            #{bcaIndex.id},#{bcaIndex.date},#{bcaIndex.shuntIndex},#{bcaIndex.businessDistrictId}
+        </foreach>
+    </insert>
+</mapper>

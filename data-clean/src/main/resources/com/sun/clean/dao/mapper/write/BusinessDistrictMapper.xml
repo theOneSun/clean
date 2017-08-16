@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.write.BusinessDistrictMapper">
+    <insert id="insertList" parameterType="com.sun.clean.domain.BusinessDistrict">
+        INSERT INTO dc_meal_business_district VALUES
+        <foreach collection="list" open="(" close=")" separator="),(" item="businessDistrict">
+            #{businessDistrict.id},#{businessDistrict.name},#{businessDistrict.primaryArea},
+            #{businessDistrict.secondaryArea},#{businessDistrict.starLevel},#{businessDistrict.labels},
+            #{businessDistrict.open},#{businessDistrict.unionPayCode}
+        </foreach>
+    </insert>
+
+    <select id="getAllOpen" resultType="com.sun.clean.domain.BusinessDistrict">
+        SELECT
+            *
+        FROM
+            dc_meal_business_district
+        WHERE
+            `open` = 1
+    </select>
+
+    <select id="getAll" resultType="com.sun.clean.domain.BusinessDistrict">
+        SELECT
+            *
+        FROM
+            dc_meal_business_district
+    </select>
+
+    <select id="getList" resultType="com.sun.clean.domain.BusinessDistrict">
+        SELECT
+            *
+        FROM
+            dc_meal_business_district
+        WHERE
+            id IN
+        <foreach collection="idSet" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getOpenByCity" resultType="com.sun.clean.domain.BusinessDistrict">
+        SELECT * FROM dc_meal_business_district WHERE `open` = 1 AND primary_area IN
+        <foreach collection="cityList" item="city" separator="," open="(" close=")">
+            #{city}
+        </foreach>
+    </select>
+    <select id="getAllId" resultType="java.lang.String">
+        SELECT id FROM dc_meal_business_district
+    </select>
+
+    <update id="setOpen" parameterType="string">
+        UPDATE dc_meal_business_district SET `open` = 1 WHERE id = #{id}
+    </update>
+    <update id="setOpenBatch" parameterType="string">
+        UPDATE dc_meal_business_district SET `open` = 1 WHERE id in
+        <foreach item="id" collection="openIdList" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

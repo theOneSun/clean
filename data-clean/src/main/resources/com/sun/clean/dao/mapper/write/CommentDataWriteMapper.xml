@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.write.CommentDataWriteMapper">
+    <insert id="insertList">
+        INSERT INTO dc_meal_comment_data VALUES
+        <foreach collection="writeList" open="(" close=")" separator="),(" item="commentData">
+            #{commentData.id},#{commentData.businessDistrictId},#{commentData.vegetableType},
+            #{commentData.lessThanForty},#{commentData.fortyEighty},#{commentData.fortyGreathundred},
+            #{commentData.greathundredEightscore},#{commentData.greaterEightscore},#{commentData.batch}
+        </foreach>
+    </insert>
+</mapper>

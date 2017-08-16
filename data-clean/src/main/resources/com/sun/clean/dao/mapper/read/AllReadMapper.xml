@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.clean.dao.mapper.read.AllReadMapper">
+    <resultMap id="ageReadResultMap" type="com.sun.clean.domain.read.AgeRead">
+        <id property="id" column="id" jdbcType="CLOB" />
+        <result property="businessDistrictId" column="business_district_id" jdbcType="CLOB" />
+        <result property="caPersonaAge_0_19" column="ca_persona_age_0_19" jdbcType="DOUBLE" />
+        <result property="caPersonaAge_20_29" column="ca_persona_age_20_29" jdbcType="DOUBLE" />
+        <result property="caPersonaAge_30_39" column="ca_persona_age_30_39" jdbcType="DOUBLE" />
+        <result property="caPersonaAge_40_49" column="ca_persona_age_40_49" jdbcType="DOUBLE" />
+        <result property="caPersonaAge_50_59" column="ca_persona_age_50_59" jdbcType="DOUBLE" />
+        <result property="caPersonaAge_60_above" column="ca_persona_age_60_above" jdbcType="DOUBLE" />
+        <result property="batch" column="batch" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="getAllAgeRead" resultMap="ageReadResultMap">
+        SELECT * FROM dc_meal_age
+    </select>
+
+    <select id="getAllAvgRatioRead" resultType="com.sun.clean.domain.read.AvgRatioRead">
+        SELECT * FROM dc_meal_avg_price_greater_than_eighty_comment_ratio
+    </select>
+
+    <select id="getAllAvgShopNumRead" resultType="com.sun.clean.domain.read.AvgShopNumRead">
+        SELECT * FROM dc_meal_avg_price_greater_than_eighty_shop_num
+    </select>
+
+    <select id="getAllBcaIndexRead" resultType="com.sun.clean.domain.read.BcaIndexRead">
+        SELECT * FROM dc_meal_bca_overview_shunt_index
+    </select>
+
+    <select id="getAllBcaInformationRead" resultType="com.sun.clean.domain.read.BcaInformationRead">
+        SELECT * FROM dc_meal_bca_restaurant_different_fold_shop_information
+    </select>
+
+    <select id="getAllBcaSituationRead" resultType="com.sun.clean.domain.read.BcaSituationRead">
+        SELECT * FROM dc_meal_bca_restaurant_format_situation
+    </select>
+
+    <select id="getAllCommentRead" resultType="com.sun.clean.domain.read.CommentRead">
+        SELECT * FROM dc_meal_comment
+    </select>
+
+    <select id="getAllCommentDataRead" resultType="com.sun.clean.domain.read.CommentDataRead">
+        SELECT * FROM dc_meal_comment_data
+    </select>
+
+    <select id="getAllCommentShareRead" resultType="com.sun.clean.domain.read.CommentShareRead">
+        SELECT * FROM dc_meal_comment_share
+    </select>
+
+    <select id="getAllGenderRead" resultType="com.sun.clean.domain.read.GenderRead">
+        SELECT * FROM dc_meal_gender
+    </select>
+
+    <select id="getAllRentalRead" resultType="com.sun.clean.domain.read.RentalRead">
+        SELECT * FROM dc_meal_rental
+    </select>
+
+    <select id="getAllShopsRead" resultType="com.sun.clean.domain.read.ShopsRead">
+        SELECT * FROM dc_meal_shops
+    </select>
+
+    <select id="getAllBusinessRead" resultType="com.sun.clean.domain.read.BusinessRead">
+        SELECT * FROM business
+    </select>
+
+</mapper>
